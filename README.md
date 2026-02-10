@@ -18,6 +18,7 @@ Table of Contents
     * [encode_skip_unsupported_value_types](#encode_skip_unsupported_value_types)
     * [encode_indent](#encode_indent)
     * [decode_array_with_array_mt](#decode_array_with_array_mt)
+    * [decode_allow_comment](#decode_allow_comment)
 
 Description
 ===========
@@ -263,9 +264,9 @@ cjson.encode(t) -- {"my_array":[]} properly re-encoded as an array
 
 [Back to TOC](#table-of-contents)
 
-decode_allow_comments
+decode_allow_comment
 --------------------------
-**syntax:** `cjson.decode_allow_comments(enabled)`
+**syntax:** `cjson.decode_allow_comment(enabled)`
 
 **default:** false
 

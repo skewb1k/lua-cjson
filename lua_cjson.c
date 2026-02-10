@@ -179,7 +179,7 @@ typedef struct {
     int decode_invalid_numbers;
     int decode_max_depth;
     int decode_array_with_array_mt;
-    int decode_allow_comments;
+    int decode_allow_comment;
     int encode_skip_unsupported_value_types;
 } json_config_t;
 
@@ -386,11 +386,11 @@ static int json_cfg_decode_array_with_array_mt(lua_State *l)
 }
 
 /* Configures whether decoder allows comments */
-static int json_cfg_decode_allow_comments(lua_State *l)
+static int json_cfg_decode_allow_comment(lua_State *l)
 {
     json_config_t *cfg = json_arg_init(l, 1);
 
-    json_enum_option(l, 1, &cfg->decode_allow_comments, NULL, 1);
+    json_enum_option(l, 1, &cfg->decode_allow_comment, NULL, 1);
 
     return 1;
 }
@@ -527,7 +527,7 @@ static void json_create_config(lua_State *l)
     cfg->encode_number_precision = DEFAULT_ENCODE_NUMBER_PRECISION;
     cfg->encode_empty_table_as_object = DEFAULT_ENCODE_EMPTY_TABLE_AS_OBJECT;
     cfg->decode_array_with_array_mt = DEFAULT_DECODE_ARRAY_WITH_ARRAY_MT;
-    cfg->decode_allow_comments = DEFAULT_DECODE_ALLOW_COMMENTS;
+    cfg->decode_allow_comment = DEFAULT_DECODE_ALLOW_COMMENTS;
     cfg->encode_escape_forward_slash = DEFAULT_ENCODE_ESCAPE_FORWARD_SLASH;
     cfg->encode_skip_unsupported_value_types = DEFAULT_ENCODE_SKIP_UNSUPPORTED_VALUE_TYPES;
     cfg->encode_indent = DEFAULT_ENCODE_INDENT;
@@ -1302,7 +1302,7 @@ static void json_next_token(json_parse_t *json, json_token_t *token)
             json->ptr++;
         }
 
-        if (!json->cfg->decode_allow_comments)
+        if (!json->cfg->decode_allow_comment)
             break;
 
         /* Eat comments. */
@@ -1671,7 +1671,7 @@ static int lua_cjson_new(lua_State *l)
         { "decode", json_decode },
         { "encode_empty_table_as_object", json_cfg_encode_empty_table_as_object },
         { "decode_array_with_array_mt", json_cfg_decode_array_with_array_mt },
-        { "decode_allow_comments", json_cfg_decode_allow_comments },
+        { "decode_allow_comment", json_cfg_decode_allow_comment },
         { "encode_sparse_array", json_cfg_encode_sparse_array },
         { "encode_max_depth", json_cfg_encode_max_depth },
         { "decode_max_depth", json_cfg_decode_max_depth },

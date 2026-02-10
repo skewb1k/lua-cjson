@@ -334,8 +334,8 @@ local cjson_tests = {
       false, { "Expected value but found invalid unicode escape code at character 2" } },
 
     -- Test comments
-    { 'Set decode_allow_comments(true)',
-      json.decode_allow_comments, { true }, true, { true } },
+    { 'Set decode_allow_comment(true)',
+      json.decode_allow_comment, { true }, true, { true } },
     { "Decode single-line comment",
       json.decode, { '{//comment\n}' }, true, { {} } },
     { "Decode single-line comment with windows newline",
@@ -356,8 +356,8 @@ local cjson_tests = {
     { "Decode comment inside number [throw error]",
       json.decode, { '{"a":1/*x*/0}' },
       false, { "Expected comma or object end but found T_INTEGER at character 12" } },
-    { 'Set decode_allow_comments(false)',
-      json.decode_allow_comments, { false }, true, { false } },
+    { 'Set decode_allow_comment(false)',
+      json.decode_allow_comment, { false }, true, { false } },
 
     -- Test indenting
     { 'Set encode_indent("  ")',
